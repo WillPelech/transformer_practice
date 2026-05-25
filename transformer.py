@@ -41,17 +41,33 @@ class PositionalEncoder(Module):
         self.dimension = dimension 
         
     def forward(self,text:list[str])->Tensor:
+        res = []
         for word,index in enumerate(text):
-            get_positional_encoding()
+            res.append(get_positional_encoding())
             
         
 
         return Tensor([]) 
+    
     #the idea is that we provide the whole row for a specific entry 
     def get_positional_encoding(self, index)->list[int]:
-        
+        dim = self.dimension
+        for i in range(dim):
+            if i%2==0:
+                self.odd_index()
+            elif i%2==1:
+                self.even_index()
+            
 
-    
+        return [1]
+        
+    def odd_index(self):
+        pass
+
+    def even_index(self):
+        pass
+
+
 
 
 print(src)
