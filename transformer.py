@@ -27,18 +27,33 @@ print(embeddings)
 
 #### positional encoding 
 ## so this equation is used p(k,j)
+import torch.nn as nn
+from torch import Tensor
+from torch.nn import Module
+from math import sin, cos 
+#positional encoder
+
+#Module Inherited type
+
+class PositionalEncoder(Module):
+    def __init__(self, dimension = 512):
+        super().__init__()
+        self.dimension = dimension 
+        
+    def forward(self,text:list[str])->Tensor:
+        for word,index in enumerate(text):
+            get_positional_encoding()
+            
+        
+
+        return Tensor([]) 
+    #the idea is that we provide the whole row for a specific entry 
+    def get_positional_encoding(self, index)->list[int]:
+        
+
+    
 
 
-
-
-
-from torch import rand
-from torch.nn import TransformerEncoder, TransformerEncoderLayer
-
-encoder_layer = TransformerEncoderLayer(d_model=512, nhead=8)
-transformer_encoder = TransformerEncoder(encoder_layer, num_layers=6)
-src = rand(10, 32, 512)
-out = transformer_encoder(src) 
 print(src)
 
 
