@@ -48,29 +48,32 @@ class PositionalEncoder(Module):
         return Tensor(res) 
     
     #the idea is that we provide the whole row for a specific entry 
-    def get_positional_encoding(self, k)->list[int]:
-        dim = self.dimension
+    def get_positional_encoding(self, k) -> list[float]:
         res = []
-        for j in range(dim):
-            if j%2==0:
-                res.append(self.even_index(k,j))
-            elif j%2==1:
-                res.append(self.odd_index(k,j))
-            
-        return res 
-        
-    def odd_index(self,k,j):
-        return sin(k/(DENOM_BASE**(2*j/self.dimension)))
+        for j in range(self.dimension):
+            if j % 2 == 0:
+                res.append(self.even_index(k, j))
+            else:
+                res.append(self.odd_index(k, j))
+        return res
 
-    def even_index(self,k,j):
-        j= j+1
-        return cos(k/(DENOM_BASE**(2*j/self.dimension)))
-    def __repl__(self):
-        pass
+    def even_index(self, k, j):
+        i = j // 2
+        return sin(k / (DENOM_BASE ** (2 * i / self.dimension)))
+
+    def odd_index(self, k, j):
+        i = j // 2
+        return cos(k / (DENOM_BASE ** (2 * i / self.dimension)))
 
 
 
 
 pos = PositionalEncoder()
-pos(text)
-print 
+result_tensor = pos(text[0].split())
+
+
+
+print("============Results================")
+print(f"Embedding Query = {embedding_query}")
+print(f"PositonalEncoding = {result_tensor}")
+
