@@ -3,6 +3,7 @@ from huggingface_hub import InferenceClient
 import os 
 import pandas as pd
 
+DENOM_BASE = 10000
 
 load_dotenv()
 
@@ -42,34 +43,34 @@ class PositionalEncoder(Module):
         
     def forward(self,text:list[str])->Tensor:
         res = []
-        for word,index in enumerate(text):
-            res.append(get_positional_encoding())
-            
-        
-
-        return Tensor([]) 
+        for index,_ in enumerate(text):
+            res.append(self.get_positional_encoding(index))
+        return Tensor(res) 
     
     #the idea is that we provide the whole row for a specific entry 
-    def get_positional_encoding(self, index)->list[int]:
+    def get_positional_encoding(self, k)->list[int]:
         dim = self.dimension
-        for i in range(dim):
-            if i%2==0:
-                self.odd_index()
-            elif i%2==1:
-                self.even_index()
+        res = []
+        for j in range(dim):
+            if j%2==0:
+                res.append(self.even_index(k,j))
+            elif j%2==1:
+                res.append(self.odd_index(k,j))
             
-
-        return [1]
+        return res 
         
-    def odd_index(self):
+    def odd_index(self,k,j):
+        return sin(k/(DENOM_BASE**(2*j/self.dimension)))
+
+    def even_index(self,k,j):
+        j= j+1
+        return cos(k/(DENOM_BASE**(2*j/self.dimension)))
+    def __repl__(self):
         pass
 
-    def even_index(self):
-        pass
 
 
 
-
-print(src)
-
-
+pos = PositionalEncoder()
+pos(text)
+print 
