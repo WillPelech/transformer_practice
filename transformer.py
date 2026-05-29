@@ -29,7 +29,6 @@ print(embeddings)
 #### positional encoding 
 ## so this equation is used p(k,j)
 import torch.nn as nn
-from torch import Tensor
 from torch.nn import Module
 from math import sin, cos 
 #positional encoder
@@ -41,11 +40,11 @@ class PositionalEncoder(Module):
         super().__init__()
         self.dimension = dimension 
         
-    def forward(self,text:list[str])->Tensor:
+    def forward(self,text:list[str])->pd.DataFrame:
         res = []
         for index,_ in enumerate(text):
             res.append(self.get_positional_encoding(index))
-        return Tensor(res) 
+        return pd.DataFrame(res) 
     
     #the idea is that we provide the whole row for a specific entry 
     def get_positional_encoding(self, k) -> list[float]:
@@ -69,11 +68,42 @@ class PositionalEncoder(Module):
 
 
 pos = PositionalEncoder()
-result_tensor = pos(text[0].split())
+result_dataframe= pos(text[0].split())
 
+# This is also known as the X matrix  
+combined_df = embeddings + result_dataframe
 
+dimension = combined_df.shape
 
 print("============Results================")
 print(f"Embedding Query = {embedding_query}")
-print(f"PositonalEncoding = {result_tensor}")
+print(f"PositonalEncoding = {result_dataframe}")
+
+#way that we can randomly distribute the weihgts 
+
+
+def xavier_distribution(model_dimension=512)->pd.DataFrame:
+    data = np.randoma
+    return pd.DataFrame(data)
+
+
+weight_query =  
+weight_key= []
+weight_value= []
+
+
+
+#Attention Mechanism
+#Q,K,V -> Query Key Value
+
+
+def attention_mechanism(Query, Key, Value):
+    pass
+
+
+
+
+
+
+
 
