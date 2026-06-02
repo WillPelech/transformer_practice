@@ -81,15 +81,24 @@ print(f"PositonalEncoding = {result_dataframe}")
 
 #way that we can randomly distribute the weihgts 
 
+import numpy as np 
 
 def xavier_distribution(model_dimension=512)->pd.DataFrame:
-    data = np.randoma
-    return pd.DataFrame(data)
+    data = np.random.uniform(-1,1, size =(model_dimension,1))
+    fin_data = np.sqrt(data/model_dimension)
 
+    return pd.DataFrame(fin_data)
 
-weight_query =  
-weight_key= []
-weight_value= []
+print("---- xavier_distribution test ----")
+print(xavier_distribution(3))
+d_k = 64
+weight_query = nn.Linear(dimension,d_k,bias=False)
+weight_key= nn.Linear(dimension,d_k,bias=False)
+weight_value= nn.Linear(dimension,d_k,bias=False)
+
+Q =
+K =
+V =
 
 
 
