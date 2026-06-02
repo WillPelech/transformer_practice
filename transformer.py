@@ -28,6 +28,7 @@ print(embeddings)
 
 #### positional encoding 
 ## so this equation is used p(k,j)
+import torch
 import torch.nn as nn
 from torch.nn import Module
 from math import sin, cos 
@@ -96,9 +97,13 @@ weight_query = nn.Linear(dimension,d_k,bias=False)
 weight_key= nn.Linear(dimension,d_k,bias=False)
 weight_value= nn.Linear(dimension,d_k,bias=False)
 
-Q =
-K =
-V =
+import torch
+
+X= torch.tensor(combined_df.values, dtype = torch.float32)
+
+Q = weight_query(X)
+K = weight_key(X)
+V = weight_value(X)
 
 
 
